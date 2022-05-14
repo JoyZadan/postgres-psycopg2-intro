@@ -8,6 +8,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
+# create a new variable of 'db', and use create_engine
+# to point to our specific database location
 # executing the instructions from the "chinook" database
 db = create_engine("postgresql:///chinook")
 base = declarative_base()
@@ -15,6 +17,9 @@ base = declarative_base()
 
 # create a class-based model for the "Artist" table
 class Artist(base):
+    """
+    Create a class-based model for the "Artist" table
+    """
     __tablename__ = "Artist"
     ArtistId = Column(Integer, primary_key=True)
     Name = Column(String)
@@ -22,6 +27,9 @@ class Artist(base):
 
 # create a class-based model for the "Album" table
 class Album(base):
+    """
+    Create a class-based model for the "Album" table
+    """
     __tablename__ = "Album"
     AlbumId = Column(Integer, primary_key=True)
     Title = Column(String)
@@ -30,6 +38,9 @@ class Album(base):
 
 # create a class-based model for the "Track" table
 class Track(base):
+    """
+    Create a class-based model for the "Track" table
+    """
     __tablename__ = "Track"
     TrackId = Column(Integer, primary_key=True)
     Name = Column(String)
@@ -65,19 +76,19 @@ base.metadata.create_all(db)
 
 
 # Query 3 - select only "Queen" from the "Artist" table
-artist = session.query(Artist).filter_by(Name="Queen").first()
-print(artist.ArtistId, artist.Name, sep=" | ")
+# artist = session.query(Artist).filter_by(Name="Queen").first()
+# print(artist.ArtistId, artist.Name, sep=" | ")
 
 
 # Query 4 - select only by "ArtistId" #51 from the "Artist" table
-artist = session.query(Artist).filter_by(ArtistId=51).first()
-print(artist.ArtistId, artist.Name, sep=" | ")
+# artist = session.query(Artist).filter_by(ArtistId=51).first()
+# print(artist.ArtistId, artist.Name, sep=" | ")
 
 
 # Query 5 - select only the albums with "ArtistId" #51 on the "Album" table
-albums = session.query(Album).filter_by(ArtistId=51)
-for album in albums:
-    print(album.AlbumId, album.Title, album.ArtistId, sep=" | ")
+# albums = session.query(Album).filter_by(ArtistId=51)
+# for album in albums:
+#     print(album.AlbumId, album.Title, album.ArtistId, sep=" | ")
 
 
 # Query 6 challenge solution -
